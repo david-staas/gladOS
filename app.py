@@ -1,12 +1,12 @@
 from flask import Flask
 from markupsafe import escape
-
+from flask import render_template
 
 app = Flask(__name__)
-
+v = {}
 @app.route("/")
 def main():
-    return "<p>Hello, World!</p>"
+    return render_template('/home.html', v=v)
 
 @app.route("/api/motor/<motor>/<location>")
 def move_base(motor, location):
