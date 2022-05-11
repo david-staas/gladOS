@@ -13,63 +13,63 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <style>
         #eq > span {
-            height:120px; float:left; margin:15px
+            height: 120px;
+            float: left;
+            margin: 15px
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script>
-        $( function() {
+        $(function () {
             // setup master volume
-            $( "#master" ).slider({
+            $("#master").slider({
                 value: 60,
                 orientation: "horizontal",
-                range: "min",
-                animate: true
-            });
-            $( "#master2" ).slider({
-                value: 60,
-                orientation: "horizontal",
-                range: "min",
-                animate: true
-            });
-            $( "#master3" ).slider({
-                value: 60,
-                orientation: "horizontal",
-                range: "min",
-                animate: true
-            });
-            $( "#master4" ).slider({
-                value: 60,
-                orientation: "horizontal",
-                range: "min",
-                animate: true
-            });
-            // setup graphic EQ
-            $( "#eq > span" ).each(function() {
-                // read initial values from markup and remove that
-                var value = parseInt( $( this ).text(), 10 );
-                $( this ).empty().slider({
-                    value: value,
-                    range: "min",
-                    animate: true,
-                    orientation: "vertical"
-                });
-            });
-        } );
+                range: false,
+                min: 800,
+                max: 1800,
+                values: [1300],
+                stop: function (event, ui) {
+
+                    // Get values
+                    var value = ui.values[0];
+                    // var max = ui.values[1];
+                    // $('#range').text(min + ' - ' + max);
+
+                    // AJAX request
+                    $.ajax({
+                        url: '/api/motor/shoulder/' + value,
+                        type: 'get',
+                        success: function (response) {
+                        }
+                    });
+                    $("#eq > span").each(function () {
+                        // read initial values from markup and remove that
+                        var value = parseInt($(this).text(), 10);
+                        $(this).empty().slider({
+                            value: value,
+                            range: "min",
+                            animate: true,
+                            orientation: "vertical"
+                        });
+                    });
+                }
+            })
+        })
     </script>
 </head>
 <body>
 
 <p class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;">
     <span class=" " style="float:left; margin:-2px 5px 0 0;"></span>
-                                    gladOS
+    gladOS
 </p>
 
-<div id="master" style="width:175px; margin:15px;"></div>
-<div id="master2" style="width:175px; margin:15px;"></div>
-<div id="master3" style="width:175px; margin:15px;"></div>
-<div id="master4" style="width:175px; margin:15px;"></div>
+<table><tr><td>Shoulder</td><td><div id="master" style="width:175px; margin:15px;"></div></td></tr></table>
+<!--<div id="master2" style="width:175px; margin:15px;"></div>-->
+<!--<div id="master3" style="width:175px; margin:15px;"></div>-->
+<!--<div id="master4" style="width:175px; margin:15px;"></div>-->
 
 
 </body>
