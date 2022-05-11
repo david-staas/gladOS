@@ -27,9 +27,9 @@
                 value: 60,
                 orientation: "horizontal",
                 range: false,
-                min: 800,
-                max: 1800,
-                values: [1300],
+                min: 1600,
+                max: 2500,
+                values: [1600],
                 stop: function (event, ui) {
 
                     // Get values
@@ -39,7 +39,7 @@
 
                     // AJAX request
                     $.ajax({
-                        url: '/api/motor/shoulder/' + value,
+                        url: '/api/motor/base/' + value,
                         type: 'get',
                         success: function (response) {
                         }
