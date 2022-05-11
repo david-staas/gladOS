@@ -1,7 +1,7 @@
 from flask import Flask
 from markupsafe import escape
 from flask import render_template
-import PCA9685
+from PCA9685 import PCA9685
 import time
 
 app = Flask(__name__)
@@ -13,11 +13,11 @@ pwm.setPWMFreq(50)
 def main():
     return render_template('/home.html', v=v)
 
-@app.route("/api/motor/<motor>/<location>")
+@app.route("/api/motor/<motor>/<int:location>")
 def move_base(motor, location):
     s = f"moving motor {escape(motor)} to {escape(location)}"
     if motor == "base":
-        pwm.setServoPulse(10, 1250)
+        pwm.setServoPulse(0, location)
         time.sleep(0.02)
     print(s)
     return s
