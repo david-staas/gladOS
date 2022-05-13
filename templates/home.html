@@ -33,7 +33,7 @@
                 slide: function (event, ui) {
                     var value = ui.values[0];
                     $.ajax({
-                        url: '/api/motor/base/' + value,
+                        url: '/api/motor/base/' + (2500-(value-1600)),
                         type: 'get',
                         success: function (response) {
                         }
