@@ -31,41 +31,41 @@
                 max: 2500,
                 values: [1600],
                 slide: function (event, ui) {
-
                     var value = ui.values[0];
-
-                    // AJAX request
                     $.ajax({
                         url: '/api/motor/base/' + value,
                         type: 'get',
                         success: function (response) {
                         }
                     });
-                    // $("#eq > span").each(function () {
-                    //     // read initial values from markup and remove that
-                    //     var value = parseInt($(this).text(), 10);
-                    //     $(this).empty().slider({
-                    //         value: value,
-                    //         range: "min",
-                    //         animate: true,
-                    //         orientation: "vertical"
-                    //     });
-                    // });
                 }
             })
             $("#master2").slider({
-                // value: 60,
                 orientation: "horizontal",
                 range: false,
                 min: 1300,
                 max: 1700,
                 values: [1500],
-                stop: function (event, ui) {
-
+                slide: function (event, ui) {
                     var value = ui.values[0];
-
                     $.ajax({
                         url: '/api/motor/shoulder/' + value,
+                        type: 'get',
+                        success: function (response) {
+                        }
+                    });
+                }
+            })
+            $("#master3").slider({
+                orientation: "horizontal",
+                range: false,
+                min: 600,
+                max: 1000,
+                values: [800],
+                slide: function (event, ui) {
+                    var value = ui.values[0];
+                    $.ajax({
+                        url: '/api/motor/elbow/' + value,
                         type: 'get',
                         success: function (response) {
                         }
@@ -83,7 +83,9 @@
 </p>
 
 <table><tr><td>Base</td><td><div id="master" style="width:175px; margin:15px;"></div></td></tr>
-    <tr><td>shoulder</td><td><div id="master2" style="width:175px; margin:15px;"></div></td></tr></table>
+    <tr><td>shoulder</td><td><div id="master2" style="width:175px; margin:15px;"></div></td></tr>
+    <tr><td>shoulder</td><td><div id="master3" style="width:175px; margin:15px;"></div></td></tr>
+</table>
 <!--<div id="master2" style="width:175px; margin:15px;"></div>-->
 <!--<div id="master3" style="width:175px; margin:15px;"></div>-->
 <!--<div id="master4" style="width:175px; margin:15px;"></div>-->
