@@ -24,7 +24,7 @@
         $(function () {
             // setup master volume
             $("#master").slider({
-                value: 60,
+                // value: 60,
                 orientation: "horizontal",
                 range: false,
                 min: 1600,
@@ -32,10 +32,7 @@
                 values: [1600],
                 stop: function (event, ui) {
 
-                    // Get values
                     var value = ui.values[0];
-                    // var max = ui.values[1];
-                    // $('#range').text(min + ' - ' + max);
 
                     // AJAX request
                     $.ajax({
@@ -44,15 +41,34 @@
                         success: function (response) {
                         }
                     });
-                    $("#eq > span").each(function () {
-                        // read initial values from markup and remove that
-                        var value = parseInt($(this).text(), 10);
-                        $(this).empty().slider({
-                            value: value,
-                            range: "min",
-                            animate: true,
-                            orientation: "vertical"
-                        });
+                    // $("#eq > span").each(function () {
+                    //     // read initial values from markup and remove that
+                    //     var value = parseInt($(this).text(), 10);
+                    //     $(this).empty().slider({
+                    //         value: value,
+                    //         range: "min",
+                    //         animate: true,
+                    //         orientation: "vertical"
+                    //     });
+                    // });
+                }
+            })
+            $("#master2").slider({
+                // value: 60,
+                orientation: "horizontal",
+                range: false,
+                min: 1300,
+                max: 1700,
+                values: [1500],
+                stop: function (event, ui) {
+
+                    var value = ui.values[0];
+
+                    $.ajax({
+                        url: '/api/motor/shoulder/' + value,
+                        type: 'get',
+                        success: function (response) {
+                        }
                     });
                 }
             })
@@ -66,7 +82,8 @@
     gladOS
 </p>
 
-<table><tr><td>Shoulder</td><td><div id="master" style="width:175px; margin:15px;"></div></td></tr></table>
+<table><tr><td>Base</td><td><div id="master" style="width:175px; margin:15px;"></div></td></tr>
+    <tr><td>shoulder</td><td><div id="master2" style="width:175px; margin:15px;"></div></td></tr></table>
 <!--<div id="master2" style="width:175px; margin:15px;"></div>-->
 <!--<div id="master3" style="width:175px; margin:15px;"></div>-->
 <!--<div id="master4" style="width:175px; margin:15px;"></div>-->

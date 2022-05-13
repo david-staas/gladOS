@@ -2,6 +2,5 @@
 
 https://waveshare.com/wiki/Servo_Driver_HAT
 
-- Install MS VC++ 14.0 C++ tools https://visualstudio.microsoft.com/visual-cpp-build-tools/
-- pip install RPi.GPIO
-- 
+- Must run flask via: ```flask run --host=0.0.0.0``` to make it available remote from RasPi
+
