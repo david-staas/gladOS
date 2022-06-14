@@ -3,11 +3,15 @@ from markupsafe import escape
 from flask import render_template
 from PCA9685 import PCA9685
 import time
+import RPi.GPIO as GPIO
 
 app = Flask(__name__)
 v = {}
 pwm = PCA9685(0x40, debug=False)
 pwm.setPWMFreq(50)
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(17, GPIO.OUT) # LED is on GPIO pin 17
 
 @app.route("/")
 def main():
@@ -30,3 +34,12 @@ def move_base(motor, location):
         time.sleep(0.005)
     print(s)
     return s
+
+@app.route("/api/led/<int:led_pin>/<value>")
+def control_led(led_pin, value):
+    if value == "on":
+        GPIO.output(led_pin, GPIO.HIGH)
+    elif value == "off":
+        GPIO.output(led_pin, GPIO.LOW)
+    
+    
