@@ -13,12 +13,14 @@ pwm.setPWMFreq(50)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.OUT) # LED is on GPIO pin 17
 
+head_last = 1500;
 @app.route("/")
 def main():
     return render_template('/home.html', v=v)
 
 @app.route("/api/motor/<motor>/<int:location>")
 def move_base(motor, location):
+    global head_last
     s = f"moving motor {escape(motor)} to {escape(location)}"
     if motor == "base":
         pwm.setServoPulse(0, location)
@@ -28,10 +30,20 @@ def move_base(motor, location):
         time.sleep(0.04)
     elif motor == "elbow":
         pwm.setServoPulse(4, location)
-        time.sleep(0.02)
+        time.sleep(0.04)
     elif motor == "head":
         pwm.setServoPulse(6, location)
         time.sleep(0.005)
+        # if head_last > location:
+        #     start = location
+        #     end = head_last
+        # else:
+        #     start = head_last
+        #     end = location
+        # for i in range(start, end):
+        #     pwm.setServoPulse(6, i)
+        #     time.sleep(0.005)
+        #     head_last = i
     print(s)
     return s
 
