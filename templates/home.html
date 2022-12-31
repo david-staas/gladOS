@@ -27,13 +27,13 @@
                 // value: 60,
                 orientation: "horizontal",
                 range: false,
-                min: 1600,
-                max: 2500,
-                values: [1600],
+                min: 1750,
+                max: 2300,
+                values: [2000],
                 slide: function (event, ui) {
                     var value = ui.values[0];
                     $.ajax({
-                        url: '/api/motor/base/' + (2500-(value-1600)),
+                        url: '/api/motor/base/' + (2300-(value-1750)),
                         type: 'get',
                         success: function (response) {
                         }
@@ -60,7 +60,7 @@
                 orientation: "horizontal",
                 range: false,
                 min: 600,
-                max: 1000,
+                max: 1500,
                 values: [800],
                 slide: function (event, ui) {
                     var value = ui.values[0];
@@ -122,7 +122,7 @@
 </p>
 
 <table><tr><td>Base</td><td><div id="master" style="width:175px; margin:15px;"></div></td></tr>
-    <tr><td>shoulder</td><td><div id="master2" style="width:175px; margin:15px;"></div></td></tr>
+    <tr><td>shoulder</td><td><div id="master2" style="width:600px; margin:15px;"></div></td></tr>
     <tr><td>elbow</td><td><div id="master3" style="width:175px; margin:15px;"></div></td></tr>
     <tr><td>head</td><td><div id="master4" style="width:900px; margin:15px;"></div></td></tr>
     <tr><td>eye</td><td><input type="checkbox" id="led"></td></tr>

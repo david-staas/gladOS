@@ -25,7 +25,7 @@ def move_base(motor, location):
         time.sleep(0.02)
     elif motor == "shoulder":
         pwm.setServoPulse(2, location)
-        time.sleep(0.02)
+        time.sleep(0.04)
     elif motor == "elbow":
         pwm.setServoPulse(4, location)
         time.sleep(0.02)
